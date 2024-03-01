@@ -11,12 +11,6 @@
 $ yarn install
 ```
 
-
-
-
-
-
-
 ## Running the app
 
 ```bash
