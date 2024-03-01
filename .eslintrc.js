@@ -5,24 +5,21 @@ module.exports = {
     tsconfigRootDir: __dirname,
     sourceType: 'module',
   },
-  plugins: [
-    '@typescript-eslint/eslint-plugin',
-    'eslint-plugin-sonarjs',
-  ],
+  plugins: ['@typescript-eslint/eslint-plugin', 'eslint-plugin-sonarjs'],
   extends: [
     'plugin:@typescript-eslint/recommended',
     'plugin:prettier/recommended',
-    "plugin:import/errors",
-    "plugin:import/warnings",
-    "plugin:import/typescript",
-    "plugin:eslint-comments/recommended",
-    "plugin:sonarjs/recommended",
+    'plugin:import/errors',
+    'plugin:import/warnings',
+    'plugin:import/typescript',
+    'plugin:eslint-comments/recommended',
+    'plugin:sonarjs/recommended',
   ],
-  overrides:[
+  overrides: [
     {
-      files: ["test/**", "*.test.ts", "*.spec.ts"],
-      plugins: ["jest"],
-      extends: ["plugin:jest/recommended"],
+      files: ['test/**', '*.test.ts', '*.spec.ts'],
+      plugins: ['jest'],
+      extends: ['plugin:jest/recommended'],
     },
   ],
   root: true,
@@ -34,14 +31,14 @@ module.exports = {
   rules: {
     '@typescript-eslint/interface-name-prefix': 'off',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
-    "eslint-comments/no-unused-disable": "error",
+    'eslint-comments/no-unused-disable': 'error',
   },
   settings: {
-    ["import/parsers"]: { "@typescript-eslint/parser": [".ts", ".tsx"] },
-    ["import/resolver"]: {
-        node: {
-            extensions: [".ts"],
-        },
+    ['import/parsers']: { '@typescript-eslint/parser': ['.ts', '.tsx'] },
+    ['import/resolver']: {
+      node: {
+        extensions: ['.ts'],
+      },
     },
   },
 };
