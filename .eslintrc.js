@@ -32,6 +32,7 @@ module.exports = {
     '@typescript-eslint/interface-name-prefix': 'off',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     'eslint-comments/no-unused-disable': 'error',
+    'import/no-unresolved': 'off',
   },
   settings: {
     ['import/parsers']: { '@typescript-eslint/parser': ['.ts', '.tsx'] },

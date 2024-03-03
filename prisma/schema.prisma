@@ -1,0 +1,67 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model NftTransfer {
+  id                String      @id @default(uuid())
+  contractAddress   String      @map("contract_address")
+  tokenId           Int         @map("token_id")
+  from              String
+  to                String
+  isMintingTx       Boolean     @default(false) @map("is_minting_tx")
+  txHash            String      @map("tx_hash")
+  blockNumber       Int         @map("block_number")
+  createdAt         DateTime    @default(now()) @map("created_at")
+  updatedAt         DateTime    @updatedAt @map("updated_at")
+
+  @@map("nft_transfers")
+}
+
+model Nft {
+  id                String      @id @default(uuid())
+  contractAddress   String      @map("contract_address")
+  tokenId           Int         @map("token_id")
+  modelId           String      @map("model_id")
+  model             NftModel    @relation(fields: [modelId], references: [id])
+  owner             String
+  createdAt         DateTime    @default(now()) @map("created_at")
+  updatedAt         DateTime    @updatedAt @map("updated_at")
+
+  @@map("nfts")
+  @@unique([contractAddress, tokenId])
+}
+
+model NftModel {
+  id                String      @id @default(uuid())
+  contractAddress   String      @map("contract_address")
+  modelId           Int         @map("model_id")
+  price             Int
+  uri               String
+  metadata          Json
+  createdAt         DateTime    @default(now()) @map("created_at")
+  updatedAt         DateTime    @updatedAt @map("updated_at")
+  nfts              Nft[]
+
+  @@map("nft_models")
+  @@unique([contractAddress, modelId])
+}
+
+model ParsedBlock {
+  id                String      @id
+  blockNumber       Int         @map("block_number") @unique
+  createdAt         DateTime    @default(now()) @map("created_at")
+  updatedAt         DateTime    @updatedAt @map("updated_at")
+
+  @@map("parsed_blocks")
+}
